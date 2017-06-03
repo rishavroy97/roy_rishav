@@ -1,0 +1,35 @@
+for i in {0..9}
+	do
+	sudo adduser user$i
+	sudo mkdir /home/user$i/delta
+	for j in {1..10}
+		do
+		sudo mkdir /home/user$i/delta/folder$j
+		sudo touch /home/user$i/delta/folder$j/file$j.txt
+		  < /dev/urandom tr -dc "[:alnum:]" | head -c10 > /home/user$i/delta/folder$j/file$j.txt
+		done
+	done
+sudo groupadd admin
+sudo groupadd moderator
+sudo groupadd student
+
+for i in {1..3}
+	do
+	sudo adduser user$i admin
+	sudo setfacl -R -m u:user0:rwx /home/user$i
+	done
+
+for i in {4..6}
+	do
+	sudo adduser user$i moderator
+	sudo setfacl -R -m u:user0:rwx /home/user$i
+	sudo setfacl -R -m g:admin:rwx /home/user$i 
+	done
+for i in {7..9}
+	do
+	sudo adduser user$i student
+	sudo setfacl -R -m u:user0:rwx /home/user$i
+	sudo setfacl -R -m g:admin:rwx /home/user$i
+	sudo setfacl -R -m g:moderator:rwx /home/user$i
+	done
+
