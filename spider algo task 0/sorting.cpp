@@ -1,4 +1,4 @@
-//Roy 106116071
+//Rishav Roy 106116071
 #include <iostream>
 #include <conio.h>
 
